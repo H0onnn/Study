@@ -1,0 +1,22 @@
+h1 {
+    text-align: center;
+    /* 텍스트 정렬 text align */
+    font-weight: normal;
+    /* 텍스트 굵기 설정 font weight */
+    text-decoration: red underline wavy;
+    /* 텍스트에 선을 그을 수 있음 (밑줄, 윗줄, 취소선 등) 색상 및 모양도 지정 가능하다. */
+    letter-spacing: 10px;
+    /* 텍스트 자간 조절 */
+    font-family: Times New Roman, Arial;
+    /* 글꼴 변경하기, 콤마를 사용해서 우선 순위를 정할 수 있다. 해당 폰트가 기기에 없을 경우 다음 폰트로 보여짐 */
+}
+
+p {
+    text-align: right;
+    line-height: 2;
+    /* 줄 간격 설정 */
+}
+
+a {
+    text-decoration: none;
+}

@@ -1,0 +1,43 @@
+h1 {
+    background-color: pink;
+    width: 100px;
+    padding: 10px;
+    margin: 0;
+}
+
+/* padding 값 적용 속기법 (margin 도 동일)
+1. padding: 10px; => 상하좌우 모두 10px 적용
+2. padding: 10px 20px; => 상하 10px, 좌우 20px 적용
+3. padding: 10px 20px 15px => 상 10px 좌우 20px 하 15px 적용
+4. padding: 10px 15px 20px 25px => 시계 방향 순으로 적용
+*/
+
+body {
+    margin: 0;
+}
+
+/* body 태그는 default 값으로 margin을 가지고 있기 때문에 불필요한 공간 차지를 줄이기 위해 초기 0으로 설정하는 경우가 많다. */
+
+.one {
+    background-color: aqua;
+    width: 200px;
+    height: 200px;
+    padding: 10px;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    margin-left: 20px;
+}
+
+.two {
+    width: 200px;
+    height: 200px;
+    background-color: aquamarine;
+    padding: 10px;
+}
+
+.three {
+    width: 200px;
+    height: 200px;
+    background-color: yellowgreen;
+    padding: 10px;
+}

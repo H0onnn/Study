@@ -1,0 +1,105 @@
+/* * {
+    background-color: pink;
+}
+
+CSS 전체 선택자, 웹페이지의 모든 요소를 선택한다. 다만 자주 사용되지 않는다. */
+
+body {
+    background-color: #f1faee;
+}
+
+button {
+    font-size: 30px;
+    background-color: #a8dadc;
+}
+
+/* CSS 요소 선택자, 해당하는 요소 전체의 스타일을 변경한다. H1, H2, BUTTON 등이 이에 해당한다. */
+
+h1,
+h2 {
+    color: #1d3557
+}
+
+/* 콤마를 사용해서 여러가지 요소를 한 번에 선택할 수 있다. */
+
+#signup {
+    background-color: #1d3557;
+    color: #f1faee;
+}
+
+/* id 선택자, 요소에 id를 부여해서 해당 요소만 선택 할 수 있다. # 뒤에 id명을 입력하면 된다. 
+중요한 것은 id는 고유 명사이기 때문에 중복될 수 없다. */
+
+span {
+    color: #C0DEFF;
+}
+
+.tag {
+    background-color: #e63946;
+    color: #f1faee;
+    font-size: 15px;
+}
+
+/* class 선택자, id 선택자와 마찬가지로 요소에 class를 부여해서 해당 요소를 선택 할 수 있다. .점 뒤에 class 명을 입력한다.
+id 선택자와 차별점은 여러 요소를 선택할 수 있다는 것. */
+
+.post a {
+    color: #1d3557;
+    font-weight: bold;
+}
+
+footer a {
+    color: #e63946;
+}
+
+/* 자손 선택자, 엄마 태그에 포함된 자식 태그를 선택할 수 있다. 태그와 태그 사이에 '띄어쓰기'를 사용한다.
+위는 'footer' 태그에 포함된 'a' 태그를 선택한 것이다. class 선택자와 함께 많이 사용된다. */
+
+h2+button {
+    font-size: 20px;
+}
+
+/* 인접 선택자, '+'를 이용하여 해당 요소와 인접한 요소를 선택한다. 태그와 태그 사이에 '+' 입력.
+위는 'h2' 다음에 오는 'button' 태그를 선택한 것으로 여러개를 동시에 선택 가능. */
+
+footer>a {
+    color: aquamarine;
+}
+
+/* 직계 자손 선택자, '>'를 이용하여 해당 태그와 직접적으로 연결된 요소를 선택한다.
+일반 자손 선택자는 'footer' 태그에 포함된 모든 'a' 태그를 선택하지만,
+직계 자손 선택자를 사용하여 'footer' 태그에 직접적으로 연결된 'a' 태그만을 선택할 수 있다. */
+
+input[type="password"] {
+    color: greenyellow;
+}
+
+a[href*="google"] {
+    color: magenta;
+}
+
+/* 속성 선택자, '[]'를 사용하여 해당 속성을 가진 요소만을 선택할 수 있다. */
+
+.post button:hover {
+    background-color: #ADA2FF;
+    color: floralwhite;
+}
+
+.post a:hover {
+    text-decoration: underline wavy;
+}
+
+.post button:active {
+    background-color: goldenrod;
+}
+
+.post:nth-of-type(3) {
+    background-color: #dfe8dc;
+}
+
+/* 가상 선택자, ':' 뒤에 가상 선택자를 입력하여 해당 행동을 했을 때 스타일이 변경되게 설정할 수 있다.
+'hover'의 경우 마우스를 올렸을 때, 'active'의 경우 버튼을 클릭했을 때, 'nth'의 경우 스타일을 설정할 순서 지정 가능. */
+
+h2::first-letter {
+    font-size: 40px;
+}

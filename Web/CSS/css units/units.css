@@ -1,0 +1,15 @@
+section {
+    background-color: #BFACE2;
+    width: 300px;
+    height: 300px;
+}
+
+div {
+    background-color: pink;
+    width: 50%;
+    height: 50%;
+}
+/* 퍼센트 (%) 단위는 width와 height에 적용할 경우, 부모 요소의 해당 퍼센트를 따른다.
+   위의 경우 div는 부모 요소인 section의 width, height 값인 300px의 50% 즉, 150px로 설정한 값과 동일하다. */
+
+   em, rem
