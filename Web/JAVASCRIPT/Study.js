@@ -477,8 +477,52 @@ stopPropagation() // 이벤트 버블링 정지
 // JS는 이를 이어받아 적절한 코드를 실행한다.
 
 
+// Js에서 비동기를 처리하는 방법 3가지, 1.콜백함수 2.Promise 3.Async / Await
 
-// ---#Promise ---
+// ---# 1.콜백함수 (함수를 인자 호출하는 함수) ---
+const fakeRequestCallback = (요청, success, failure) => { // 요청과 성공시 실행할 함수, 실패시 실행할 함수를 매개변수로 받는다.
+    const delay = Math.floor(Math.random() * 4500) + 500;
+    setTimeout(() => {
+        if (delay > 4000) {
+            failure('Connection Timeout :(')
+        } else {
+            success(`Here is your fake data from ${요청}`)
+        }
+    }, delay)
+};
+
+fakeRequestCallback(요청1,
+    function (response) {
+        console.log("IT WORKED!!!!")
+        console.log(response)
+        fakeRequestCallback(요청2,
+            function (response) {
+                console.log("IT WORKED AGAIN!!!!")
+                console.log(response)
+                fakeRequestCallback('요청3',
+                    function (response) {
+                        console.log("IT WORKED AGAIN (요청3)!!!!")
+                        console.log(response)
+                    },
+                    function (err) {
+                        console.log("ERROR (요청3)!!!", err)
+                    })
+            },
+            function (err) {
+                console.log("ERROR (요청2)!!!", err)
+            })
+    }, function (err) {
+        console.log("ERROR!!!", err)
+    })
+// 요청이 많아짐에 따라 중첩도 증가한다. 따라서 promise 함수를 사용하면 편리하다.
+
+// ---# 2.Promise ---
+new Promise((resolve, reject) => {
+    resolve();
+});
+// Promise 객체 생성 구문 (resolve, reject) 를 매개변수로 받으며, 요청 성공시 resolve, 실패시 reject를 반환한다.
+
+
 const fakeRequest = (url) => {
     new Promise((resolve, reject) => {
         const rand = Math.random();
@@ -492,14 +536,19 @@ const fakeRequest = (url) => {
 }
 
 fakeRequest('/dogs/1')
-    .then((data) => {
+    .then((data) => { // .then 메서드를 이용하여 resolve를 반환
         console.log('DONE WITH REQUEST!');
         console.log('data is:', data)
     })
-    .catch((err) => {
+    .catch((err) => { // .catch 메서드를 이용하여 reject 반환
         console.log('OH NO!', err)
     })
 
 // ---#ASYNC ---
+
+async function test() {
+    return console.log('test');
+}
+// async 함수 구문, function 앞에 'async'를 붙인다. async 함수는 자동으로 Promise를 생성 및 반환한다.
 
 
