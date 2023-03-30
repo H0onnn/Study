@@ -551,4 +551,99 @@ async function test() {
 }
 // async 함수 구문, function 앞에 'async'를 붙인다. async 함수는 자동으로 Promise를 생성 및 반환한다.
 
+const fakeRequestPromise = (요청) => {
+    return new Promise((resolve, reject) => {
+        const delay = Math.floor(Math.random() * (4500)) + 500;
+        setTimeout(() => {
+            if (delay > 4000) {
+                reject('Connection Timeout :(')
+            } else {
+                resolve(`Here is your fake data from ${요청}`)
+            }
+        }, delay)
+    })
+};
 
+async function makeTwoRequests() {
+    let data1 = await fakeRequestPromise('/page1'); // await 키워드를 이용한 promise 객체 반환.
+    console.log(data1);                             // await는 promise 객체가 완료될 때 까지 기다리며, resolve된 값을 반환한다.
+}
+
+async function makeTwoRequests() {
+    try {
+        let data1 = await fakeRequestPromise('/page1');
+        console.log(data1);
+        let data2 = await fakeRequestPromise('/page2');
+        console.log(data2);
+    } catch (e) {
+        console.log('CAUGHT AN ERROR!')
+        console.log('erroe is:', e)
+    }
+};
+// async 함수에서의 오류처리, try / catch 메서드를 사용하여 오류를 잡아낼 수 있다.
+// try 내 구문에서 요청이 실패할 시, catch가 오류를 잡아 반환한다.
+
+// ---#fetch API ---
+// ---#axios API ---
+
+// ---#class와 new ---
+
+class Color { // class 구문을 사용할 땐 클래스명을 대문자로 시작하는게 일반적이다.
+    constructor(r, g, b, name) { // class 내에서는 반드시 constructor(실행자)를 작성해야한다.
+        // constructor는 새로운 인스턴스를 인스턴스화 할 때 마다 즉시 실행된다.
+        this.r = r;
+        this.g = g;
+        this.b = b; // constructor 내에서는 일반적으로 this를 액세스하며, 이들은 반환 받을 객체에 속성으로 추가된다.(자동으로 새로운 객체를 참조한다.)
+        this.name = name;
+    }
+    innerRGB() {
+        const { r, g, b } = this;
+        return `${r}, ${g}, ${b}`;
+    }
+    rgb() {
+        return `rgb(${this.innerRGB()})`; // red.rgb() =  return rgb(255, 67, 89);
+    }
+    rgba(a = 1.0) {
+        return `rgba(${this.innerRGB()}, ${a})`; // red.rgba(0.4) =  return rgb(255, 67, 89, 0.4);
+    }
+    hex() {
+        const { r, g, b } = this;
+        return (
+            '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)
+        )
+    } // class 내에서 새로운 메서드를 정의할 수 있다.
+}
+
+
+const red = new Color(255, 67, 89, 'tomato'); // new 키워드를 통해 class를 호출한다.
+
+
+// --- class 상속과 super 키워드 ---
+
+class Pet {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    eat() {
+        return `${this.name} is eating!`;
+    }
+}
+
+
+class Cat extends Pet { // extends 키워드를 통해 class를 확장시킬 수 있다. 이 예제에서는 Pet class가 Cat, Dog class의 부모 class가 된다.
+    constructor(name, age, livesLeft = 10) {
+        super(name, age); // super 키워드를 사용하여 super class의 항목을 참조할 수 있다. 이 예제에서는 확장시키는 class, 즉 Pet을 참조한다.
+        this.livesLeft = livesLeft;
+    }
+
+    meow() { // class가 상속되면 constructor를 따로 생성하지 않아도 실행이 가능하며, 부모 class의 메서드도 사용할 수 있다.
+        return 'MEOWWW!';
+    }
+}
+
+class Dog extends Pet {
+    bark() {
+        return 'WOOFF!'
+    }
+}
