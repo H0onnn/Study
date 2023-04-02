@@ -15,3 +15,165 @@ img {
 }
 
 /* 이미지를 배경 이미지로 넣기 위한 css */
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+    /* 웹페이지에 스크롤바 생기는거 방지 */
+}
+
+#login-form,
+#clock,
+#greeting,
+#todo-form,
+#todo-list {
+    color: #fff;
+    width: 400px;
+    max-width: 100%;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 10px;
+    text-align: center;
+}
+
+form#login-form {
+    position: relative;
+    bottom: 150px;
+    text-align: center;
+}
+
+form#login-form input {
+    color: #fff;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    font-size: 30px;
+}
+
+form#login-form button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+#clock {
+    position: absolute;
+    font-size: 5rem;
+    font-family: 'Noto Sans KR', sans-serif;
+    top: 0;
+}
+
+#greeting {
+    font-size: 2rem;
+    position: fixed;
+    top: 150px;
+}
+
+input[type="text"]::placeholder {
+    color: #fff;
+    text-decoration: underline;
+}
+
+::placeholder {
+    text-align: center;
+}
+
+#todo-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#todo-input {
+    color: #fff;
+    width: 100%;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: none;
+    margin-top: 1rem;
+    background-color: transparent;
+    outline: none;
+}
+
+#todo-list li {
+    font-size: 20px;
+    line-height: 1.5;
+    padding: 10px 0;
+}
+
+#todo-list button {
+    margin-left: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    font-size: 20px;
+    color: #333;
+    padding: 0 5px;
+}
+
+#todo-list button::after {
+    content: "\00d7";
+    /* x 아이콘 */
+    font-weight: 900;
+}
+
+#quotes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    font-style: italic;
+    white-space: nowrap;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1rem;
+    position: fixed;
+    bottom: 55px;
+}
+
+#quotes span {
+    display: block;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.2rem;
+    position: relative;
+    text-decoration: underline;
+
+}
+
+#quotes span.author {
+    font-size: 1.2rem;
+    bottom: -20px;
+    /* 밑줄 아래에 위치하도록 설정 */
+    text-decoration: none;
+    opacity: 0.5;
+    /* 처음에는 살짝 투명하게 */
+    transform: translateY(10px);
+    /* 처음에는 약간 내려서 보이게 */
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    /* transition 효과를 줌 (자연스럽게 보여지는 효과) */
+}
+
+#quotes:hover span.author {
+    opacity: 1;
+    /* hover시 완전히 보이게 */
+    transform: translateY(0);
+    /* hover시에 위로 올라가면서 보이게 */
+}

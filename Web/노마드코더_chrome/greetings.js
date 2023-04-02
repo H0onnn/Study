@@ -13,7 +13,10 @@ function onLoginSubmit(e) {
 }
 
 function paintGreetings(username) {
-    greeting.innerHTML = `Hello ${username}`;
+    const form = document.querySelector("#todo-form");
+    const greeting = document.querySelector("#greeting");
+    form.classList.remove("hidden"); // 로그인 후 todo-form을 보이도록 함
+    greeting.innerHTML = `Have a nice day '${username}' !`;
     greeting.classList.remove(HIDDEN_CLASSNAME);
 }
 
