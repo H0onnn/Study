@@ -3,9 +3,21 @@ const toDoInput = document.querySelector('#todo-input');
 const toDoList = document.querySelector('#todo-list');
 const TODOS_KEY = 'todos';
 
-let completedTodos = 0;
-
 let toDos = [];
+
+function updatePercent() {
+    const totalTodos = document.querySelectorAll('li').length;
+    const checkedCount = document.querySelectorAll('input[type="checkbox"]:checked').length;
+    let percent = 0;
+    if (totalTodos !== 0) {
+        percent = (checkedCount / totalTodos) * 100;
+    }
+    const percentDisplay = document.querySelector('#percent');
+    percentDisplay.textContent = `달성률: ${percent.toFixed(2)}%`;
+    if (percent === 100) {
+        percentDisplay.textContent = '오늘의 할 일 완료 !';
+    }
+}
 
 function saveToDos() {
     localStorage.setItem(TODOS_KEY, JSON.stringify(toDos));
@@ -16,6 +28,7 @@ function deleteToDo(e) {
     li.remove();
     toDos = toDos.filter(v => v.id !== parseInt(li.id));
     saveToDos();
+    updatePercent();
 }
 
 function paintToDo(newTodo) {
@@ -27,31 +40,12 @@ function paintToDo(newTodo) {
     span.innerHTML = newTodo.text;
     const button = document.createElement('button');
     button.addEventListener('click', deleteToDo);
+    checkbox.addEventListener('click', updatePercent); // 체크박스를 클릭할 때마다 달성률 업데이트
     li.appendChild(checkbox);
     li.appendChild(span);
     li.appendChild(button);
     toDoList.appendChild(li);
-    updatePercent();
 }
-
-// function handleCheck() {
-//     if (this.checked) {
-//         completedTodos++;
-//     } else {
-//         completedTodos--;
-//     }
-
-//     updatePercent();
-
-//     if (completedTodos === checkboxes.length) {
-//         alert('오늘의 할 일 완료 !');
-//     }
-// }
-
-// function updatePercent() {
-//     const percentValue = checkboxes.length === 0 ? 0 : Math.round((completedTodos / checkboxes.length) * 100);
-//     percent.innerHTML = `${percentValue}%`;
-// }
 
 function handleToDoSumit(e) {
     e.preventDefault();

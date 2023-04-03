@@ -177,3 +177,21 @@ input[type="text"]::placeholder {
     transform: translateY(0);
     /* hover시에 위로 올라가면서 보이게 */
 }
+
+p {
+    color: #fff;
+    position: fixed;
+    bottom: 100px;
+}
+
+/* #gauge {
+    width: 100%;
+    height: 10px;
+    background-color: #ccc;
+}
+
+#gauge-filled {
+    height: 100%;
+    background-color: green;
+    transition: width 0.5s ease-in-out;
+} */
