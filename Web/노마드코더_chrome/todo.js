@@ -1,9 +1,24 @@
 const toDoForm = document.querySelector('#todo-form');
 const toDoInput = document.querySelector('#todo-input');
 const toDoList = document.querySelector('#todo-list');
+const showTodoButton = document.getElementById('show-todo');
+const todoContainer = document.getElementById('todo-container');
+const deleteAllBtn = document.getElementById('delete-all-btn');
 const TODOS_KEY = 'todos';
 
 let toDos = [];
+
+showTodoButton.addEventListener('click', () => {
+    todoContainer.classList.toggle('hidden');
+    toDoInput.focus();
+});
+
+deleteAllBtn.addEventListener('click', () => {
+    // // todo-list의 모든 자식 요소(li)를 삭제한다.
+    while (toDoList.firstChild) {
+        toDoList.removeChild(toDoList.firstChild);
+    };
+});
 
 function updatePercent() {
     const totalTodos = document.querySelectorAll('li').length;
@@ -25,13 +40,16 @@ function saveToDos() {
 
 function deleteToDo(e) {
     const li = e.target.parentElement;
+    const container = li.parentElement;
     li.remove();
+    container.remove();
     toDos = toDos.filter(v => v.id !== parseInt(li.id));
     saveToDos();
     updatePercent();
 }
 
 function paintToDo(newTodo) {
+    const container = document.createElement('div');
     const li = document.createElement('li');
     li.id = newTodo.id;
     const checkbox = document.createElement('input');
@@ -39,12 +57,15 @@ function paintToDo(newTodo) {
     const span = document.createElement('span');
     span.innerHTML = newTodo.text;
     const button = document.createElement('button');
+    container.classList.add('todo-container');
     button.addEventListener('click', deleteToDo);
     checkbox.addEventListener('click', updatePercent); // 체크박스를 클릭할 때마다 달성률 업데이트
     li.appendChild(checkbox);
     li.appendChild(span);
     li.appendChild(button);
-    toDoList.appendChild(li);
+    container.appendChild(li);
+    toDoList.appendChild(container);
+    toDoInput.value = '';
 }
 
 function handleToDoSumit(e) {
