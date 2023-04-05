@@ -14,16 +14,35 @@ showTodoButton.addEventListener('click', () => {
 });
 
 deleteAllBtn.addEventListener('click', () => {
-    // // todo-list의 모든 자식 요소(li)를 삭제한다.
+    // local storage에서 todos 항목 삭제
+    localStorage.removeItem('todos');
+
+    // todo-list의 모든 자식 요소(li)를 삭제한다.
     while (toDoList.firstChild) {
         toDoList.removeChild(toDoList.firstChild);
     };
 });
 
-function updatePercent() {
+function updatePercent(e) {
     const totalTodos = document.querySelectorAll('li').length;
     const checkedCount = document.querySelectorAll('input[type="checkbox"]:checked').length;
+    const checkbox = e.target;
+    const li = checkbox.parentNode;
+    const span = li.querySelector("span");
+
+    // 체크박스가 체크되었으면 텍스트 색상을 연하게 하고 가운데 줄 긋기
+    if (checkbox.checked) {
+        span.style.textDecoration = "line-through";
+        span.style.opacity = 0.5;
+    }
+    // 체크박스가 체크되지 않았으면 텍스트 스타일 초기화
+    else {
+        span.style.textDecoration = "none";
+        span.style.opacity = 1;
+    }
+
     let percent = 0;
+
     if (totalTodos !== 0) {
         percent = (checkedCount / totalTodos) * 100;
     }

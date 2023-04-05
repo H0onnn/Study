@@ -8,10 +8,18 @@ function onGeoOk(position) {
     fetch(url)
         .then(res => res.json())
         .then(data => {
+            // const weatherIcon = document.querySelector('.wi');
+            // const iconUrl = `https://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
+            // const iconDesc = data.weather[0].description;
+
+            // weatherIcon.style.backgroundImage = `url(${iconUrl})`;
+            // weatherIcon.setAttribute('title', iconDesc);
+
             const weather = document.querySelector('#weather span:first-child');
             const city = document.querySelector('#weather span:last-child');
+
+            weather.innerHTML = `${data.weather[0].main} / ${Math.floor(data.main.temp)}°C`;
             city.innerHTML = data.name;
-            weather.innerHTML = `${data.weather[0].main} / ${data.main.temp}`;
         });
 }
 
