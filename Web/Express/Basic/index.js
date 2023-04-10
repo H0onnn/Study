@@ -1,5 +1,5 @@
 const express = require("express"); // require를 통한 express 불러오기
-const app = express(); // expree 실행
+const app = express(); // express 실행
 
 // app.use((req, res) => {
 //     console.log("We gat a new request");
@@ -39,7 +39,7 @@ app.get('/dogs', (req, res) => {
 })
 
 app.get('*', (req, res) => {
-    res.send(`I don't know thah path!`);
+    res.send(`I don't know that path!`);
 }) // '*'를 경로로 보낼 경우, '/dogsss 와 같이 잘못된 경로로의 요청에 대한 응답을 받는다.
 // 위 코드를 가장 첫번째 줄에 작성할 경우 아래 다른 요청들에 대한 모든 응답을 덮어버리니 주의하자.
 
