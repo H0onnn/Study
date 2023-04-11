@@ -646,4 +646,4 @@ class Dog extends Pet {
     bark() {
         return 'WOOFF!'
     }
-}
+};
