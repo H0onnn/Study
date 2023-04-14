@@ -68,23 +68,23 @@ function deleteToDo(e) {
 }
 
 function paintToDo(newTodo) {
-    const container = document.createElement('div');
-    const li = document.createElement('li');
-    li.id = newTodo.id;
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    const span = document.createElement('span');
-    span.innerHTML = newTodo.text;
-    const button = document.createElement('button');
-    container.classList.add('todo-container');
-    button.addEventListener('click', deleteToDo);
+    const container = document.createElement('div'); // 새로운 할 일을 담을 컨테이너 div 생성
+    const li = document.createElement('li'); // 할 일 리스트 아이템 생성
+    li.id = newTodo.id; // li 아이템의 id 속성을 새로운 할 일의 id로 설정
+    const checkbox = document.createElement('input'); // 체크박스 생성
+    checkbox.type = 'checkbox'; // 체크박스의 타입을 checkbox로 설정
+    const span = document.createElement('span'); // 할 일 내용을 담을 span 생성
+    span.innerHTML = newTodo.text; // span의 내용을 새로운 할 일의 내용으로 설정
+    const button = document.createElement('button'); // 삭제 버튼 생성
+    container.classList.add('todo-container'); // 컨테이너 div에 todo-container 클래스 추가
+    button.addEventListener('click', deleteToDo); // 삭제 버튼에 클릭 이벤트 추가
     checkbox.addEventListener('click', updatePercent); // 체크박스를 클릭할 때마다 달성률 업데이트
-    li.appendChild(checkbox);
-    li.appendChild(span);
-    li.appendChild(button);
-    container.appendChild(li);
-    toDoList.appendChild(container);
-    toDoInput.value = '';
+    li.appendChild(checkbox); // li 아이템에 체크박스 추가
+    li.appendChild(span); // li 아이템에 span 추가
+    li.appendChild(button); // li 아이템에 삭제 버튼 추가
+    container.appendChild(li); // 컨테이너 div에 li 아이템 추가
+    toDoList.appendChild(container); // 할 일 목록에 컨테이너 div 추가
+    toDoInput.value = ''; // 할 일 입력창 초기화
 }
 
 function handleToDoSumit(e) {
