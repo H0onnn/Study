@@ -1,0 +1,9 @@
+div {
+  border: 20px solid pink;
+  margin: 10px;
+  padding: 10px;
+}
+
+.outline {
+  border: 20px solid hotpink;
+}

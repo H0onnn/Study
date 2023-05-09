@@ -1,6 +1,7 @@
+import { Container } from "@mui/system";
 import React, { useState } from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import "./App.css"; // css의 적용 (외부 파일 불러오기)
+import style from "./App.module.css";
 
 type CounterProps = {
   title: string;
@@ -8,13 +9,23 @@ type CounterProps = {
 };
 
 function Counter({ title, initValue = 0 }: CounterProps) {
-  const [count, setCount] = useState(initValue);
+  const [count, setCount] = useState<number>(initValue);
+
   function up() {
     setCount(count + 1);
   }
+
+  // css의 적용 (인라인 방식)
+  const h1Style = {
+    fontSize: "3rem",
+    color: "red",
+    fontFamily: "궁서체",
+  };
+
   return (
-    <div>
-      <h1>{title}</h1>
+    // class를 지정해서 css 적용하기, 일반 css와는 달리 className으로 지정해야한다.
+    <div className="outline">
+      <h1 style={h1Style}>{title}</h1>
       <button onClick={up}>+</button> {count}
     </div>
   );
@@ -41,7 +52,7 @@ function Counter2() {
     setTimes(newTimes);
   }
   return (
-    <>
+    <div className={style.layout}>
       <h1>Counter2</h1>
       <button onClick={up}>+</button>
       <ol>
@@ -49,7 +60,7 @@ function Counter2() {
           return <li key={index}>{value}</li>;
         })}
       </ol>
-    </>
+    </div>
   );
 }
 
@@ -74,15 +85,94 @@ function Counter3() {
   );
 }
 
+function Counter4() {
+  type countType = {
+    time: string;
+    step: number;
+  };
+
+  const [count, setCount] = useState<countType[]>([]);
+  const [step, setStep] = useState<number>(1);
+
+  // for문을 돌려보자
+  let total = 0;
+  for (let i = 0; i < count.length; i++) {
+    total += count[i].step;
+  }
+
+  return (
+    <>
+      <h1>Counter4</h1>
+      <input
+        type="number"
+        value={step}
+        onChange={(e) => {
+          console.log(e.target.value);
+          setStep(+e.target.value);
+        }}
+        style={{ marginBottom: "20px" }}
+      />
+      <button
+        onClick={() => {
+          const newCount = [...count];
+          newCount.push({ time: getCurrentTime(), step: step });
+          setCount(newCount);
+        }}
+      >
+        +
+      </button>
+
+      {/* 테이블을 사용해보자 */}
+      <table
+        style={{
+          border: "1px solid black",
+          borderCollapse: "collapse",
+        }}
+      >
+        <thead>
+          <tr>
+            <th style={{ border: "1px solid black", padding: "5px" }}>Total</th>
+            <th style={{ border: "1px solid black", padding: "5px" }}>
+              {/* reduce를 써보자 */}
+              {count.reduce((acc, cur) => {
+                return acc + cur.step;
+              }, 0)}
+            </th>
+          </tr>
+          <tr>
+            <th style={{ border: "1px solid black", padding: "5px" }}>Time</th>
+            <th style={{ border: "1px solid black", padding: "5px" }}>Step</th>
+          </tr>
+        </thead>
+        <tbody>
+          {count.map((value, index) => {
+            return (
+              <tr key={index}>
+                <td style={{ border: "1px solid black", padding: "10px" }}>
+                  {value.time}
+                </td>
+                <td style={{ border: "1px solid black", padding: "10px" }}>
+                  {value.step}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </>
+  );
+}
+
 function App() {
   return (
-    <div>
-      <Counter title="불면증 카운터" initValue={10}></Counter>
-      <Counter title="강아지 카운터"></Counter>
-      <Counter title="고양이 카운터"></Counter>
-      <Counter2 />
-      <Counter3 />
-    </div>
+    <Container>
+      <div>
+        <Counter title="불면증 카운터" initValue={10}></Counter>
+        <Counter2 />
+        <Counter3 />
+        <Counter4 />
+      </div>
+    </Container>
   );
 }
 
