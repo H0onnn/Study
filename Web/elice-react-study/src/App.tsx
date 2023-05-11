@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Grid } from "@mui/material";
+import { Button, Container, Grid } from "@mui/material";
 
 // 랜덤색 뽑아내는 함수
 function getRandomColor() {
@@ -38,6 +38,8 @@ function Counter() {
         value={step}
         onChange={(e) => setStep(+e.target.value)}
       />
+      {/* mui로 버튼 만들기 */}
+      <Button variant="outlined">+</Button>
       <button
         onClick={() => {
           const newCountItem: countItemType = {
