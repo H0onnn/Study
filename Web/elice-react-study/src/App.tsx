@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Container,
@@ -8,6 +8,45 @@ import {
   DialogTitle,
   Grid,
 } from "@mui/material";
+
+function Counter3() {
+  const [count, setCount] = useState(0);
+
+  // useEffect, fetch를 사용한 서버와 통신
+  useEffect(() => {
+    fetch("http://localhost:9999/counter")
+      .then((res) => res.json())
+      .then((data) => {
+        setCount(data.value);
+      });
+  }, []);
+
+  return (
+    <div style={{ border: "10px solid" + getRandomColor(), padding: "20px" }}>
+      <h1>Counter - Ajax & useEffect</h1>
+      <button
+        onClick={() => {
+          fetch("http://localhost:9999/counter", {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              value: count + 1,
+            }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              setCount(data.value);
+            });
+        }}
+      >
+        +
+      </button>{" "}
+      {count}
+    </div>
+  );
+}
 
 // 랜덤색 뽑아내는 함수
 function getRandomColor() {
@@ -122,6 +161,9 @@ function App() {
     <Container>
       {/* mui의 container와 grid를 이용한 컨테이너 나누기 */}
       <Grid container spacing={2}>
+        <Grid item xs={12} sm={6} md={4}>
+          <Counter3 />
+        </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <Counter2 />
         </Grid>
