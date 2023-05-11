@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Button, Container, Grid } from "@mui/material";
+import {
+  Button,
+  Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Grid,
+} from "@mui/material";
 
 // 랜덤색 뽑아내는 함수
 function getRandomColor() {
@@ -72,11 +80,51 @@ function Counter() {
   );
 }
 
+function Counter2() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div
+      style={{
+        border: "10px solid black",
+        borderRadius: "10px",
+        padding: "20px",
+      }}
+    >
+      <h1>Counter - Dialog</h1>
+      <Button variant="contained" onClick={() => setOpen(!open)}>
+        Run
+      </Button>
+      {/* mui의 dialog를 이용한 스타일링 */}
+      <Dialog open={open} onClose={() => setOpen(false)}>
+        <DialogTitle style={{ backgroundColor: getRandomColor() }}>
+          Dialog Counter
+        </DialogTitle>
+        <DialogContent>
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis
+            atque odio nostrum? Et aliquam perspiciatis tempora quibusdam sint
+            cumque optio, magni impedit voluptate illo iusto nobis perferendis
+            quia harum error.
+          </p>
+          <button>+</button> 👉 0
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpen(false)}>Close</Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
+}
+
 function App() {
   return (
     <Container>
       {/* mui의 container와 grid를 이용한 컨테이너 나누기 */}
       <Grid container spacing={2}>
+        <Grid item xs={12} sm={6} md={4}>
+          <Counter2 />
+        </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <Counter />
         </Grid>
