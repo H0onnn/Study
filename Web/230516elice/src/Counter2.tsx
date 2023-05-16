@@ -1,23 +1,49 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { Button, ButtonGroup } from "@mui/material";
 
-// useEffect와 setInterval 사용하기
-export function Counter2() {
-  const [count, setCount] = useState(0);
-
+// useEffect, setInterval, mui
+export const Counter2: React.FC = () => {
+  const [count, setCount] = useState<number>(0);
+  const [isRunning, setIsRunning] = useState<boolean>(false);
+  // isRunning : true
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCount((cur) => cur + 1);
-    }, 1000);
-
+    let id: string | number | NodeJS.Timer | undefined;
+    if (isRunning) {
+      id = setInterval(() => {
+        setCount((oldCount) => oldCount + 1);
+      }, 1000);
+    }
     return () => {
-      clearInterval(interval);
+      if (id) {
+        clearInterval(id);
+      }
     };
-  }, []);
+  }, [isRunning]);
+
+  const startCount = () => {
+    setIsRunning(true);
+  };
+
+  const stopCount = () => {
+    setIsRunning(false);
+  };
 
   return (
-    <div>
-      <h1>Counter - useEffect, setInterval</h1>
+    <div className="layout">
+      <h1>useEffect, setInterval</h1>
       {count}
+      <ButtonGroup style={{ marginLeft: 10 }}>
+        <Button variant="contained" onClick={startCount}>
+          Start
+        </Button>
+        <Button
+          style={{ marginLeft: 10 }}
+          variant="contained"
+          onClick={stopCount}
+        >
+          Stop
+        </Button>
+      </ButtonGroup>
     </div>
   );
-}
+};

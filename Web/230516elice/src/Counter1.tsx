@@ -6,7 +6,7 @@ export function Counter1() {
   const [count, setCount] = useState(0);
 
   return (
-    <div>
+    <div className="layout">
       <h1>Counter - State, form</h1>
       <input
         type="number"
